@@ -62,7 +62,7 @@ fi
 if [ ! -f avctKVM.jar ]; then
     echo "Downloading avctKVM"
 
-    wget https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVM.jar --no-check-certificate
+    wget http://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVM.jar --no-check-certificate
 
     if [ ! $? -eq 0 ]; then
         echo "${RED}Failed to download avctKVM.jar, please check your settings${NC}"
@@ -74,7 +74,7 @@ fi
 if [ ! -f lib/avctKVMIOLinux64.jar ]; then
     echo "Downloading avctKVMIOLinux64"
 
-    wget -O lib/avctKVMIOLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVMIOLinux64.jar --no-check-certificate
+    wget -O lib/avctKVMIOLinux64.jar http://${IDRAC_HOST}:${IDRAC_PORT}/software/avctKVMIOLinux64.jar --no-check-certificate
 
     if [ ! $? -eq 0 ]; then
         echo "${RED}Failed to download avctKVMIOLinux64.jar, please check your settings${NC}"
@@ -86,7 +86,7 @@ fi
 if [ ! -f lib/avctVMLinux64.jar ]; then
     echo "Downloading avctVMLinux64"
 
-    wget -O lib/avctVMLinux64.jar https://${IDRAC_HOST}:${IDRAC_PORT}/software/avctVMLinux64.jar --no-check-certificate
+    wget -O lib/avctVMLinux64.jar http://${IDRAC_HOST}:${IDRAC_PORT}/software/avctVMLinux64.jar --no-check-certificate
 
     if [ ! $? -eq 0 ]; then
         echo "${RED}Failed to download avctVMLinux64.jar, please check your settings${NC}"
@@ -118,7 +118,7 @@ if [ -n "$IDRAC_KEYCODE_HACK" ]; then
 
     export LD_PRELOAD=/keycode-hack.so
 fi
-exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=5900 vport=5900 user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=https://${IDRAC_HOST}:443/help/contents.html" &
+exec java -cp avctKVM.jar -Djava.library.path="./lib" com.avocent.idrac.kvm.Main ip=${IDRAC_HOST} kmport=5900 vport=5900 user=${IDRAC_USER} passwd=${IDRAC_PASSWORD} apcp=1 version=2 vmprivilege=true "helpurl=http://${IDRAC_HOST}:443/help/contents.html" &
 
 # If an iso exists at the specified location, mount it
 [ -f "/vmedia/$VIRTUAL_ISO" ] && /mountiso.sh
